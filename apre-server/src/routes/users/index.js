@@ -12,9 +12,25 @@ const express = require('express');
 const { mongo } = require('../../utils/mongo');
 const { ObjectId } = require('mongodb');
 const bcrypt = require('bcryptjs');
+const Ajv = require("ajv"); // Require ajv (Another JavaScript Validator)
+const ajv = new Ajv(); // New up an instance of ajv
 
 const router = express.Router(); // Create a new router object
 const saltRounds = 10; // Number of salt rounds for the bcrypt hashing algorithm
+
+// Add a format to ajv to validate MongoDB ObjectIds
+ajv.addFormat('objectid', {
+  type: 'string',
+  validate: (data) => {
+    return ObjectId.isValid(data);
+  }
+});
+
+// JSON Schema object for our user Id
+const userIdSchema = {
+  type: "string",
+  format: "objectid"
+};
 
 /**
  * @description
@@ -58,6 +74,15 @@ router.get('/', async (req, res, next) => {
  */
 router.get('/:id', (req, res, next) => {
   try {
+    // Generate the validate function based on the userIdSchema
+    const validateId = ajv.compile(userIdSchema);
+    // Validate the Id against the schema
+    const validId = validateId(req.params.id);
+    // Check for valid to be false, throw an error if it is not valid
+    if(!validId) {
+      throw new Error(400, 'Invalid parameter');
+    }
+
     const { id } = req.params;
 
     mongo(async db => {
