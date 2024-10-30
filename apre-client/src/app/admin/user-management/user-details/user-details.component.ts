@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
           }
         </div>
 
-        <!-- Added title tag to display tooltip within the email input field -->
+        <!-- Added title tag to display tooltip within the email input field for minor task-->
         <div class="form__group">
           <label class="label" for="email">Email<span class="required">*</span></label>
           <input class="input" type="text" formControlName="email" id="email" name="email" title="Please enter a valid email address">
