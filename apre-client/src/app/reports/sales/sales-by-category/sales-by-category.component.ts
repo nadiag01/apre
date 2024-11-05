@@ -40,7 +40,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
     </div>
   `,
   styles: `
-  category-container {
+  .category-container {
       display: flex;
       flex-direction: column;
       align-items: center;
