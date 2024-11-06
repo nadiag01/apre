@@ -78,4 +78,50 @@ router.get('/regions/:region', (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+/**
+ * @description
+ *
+ * GET /salesData
+ *
+ * Fetches all sales data .
+ *
+ * Example:
+ * fetch('/regions/north')
+ *  .then(response => response.json())
+ *  .then(data => console.log(data));
+ */
+router.get('/salesData/:salesData', (req, res, next) => {
+  try {
+    mongo (async db => {
+      const saleData = await db.collection('sales').aggregate([
+        { $match: { sales: req.params.sales} },
+        {
+          $group: {
+            _id: '$salesperson',
+            totalSales: { $sum: '$amount'}
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            salesperson: '$_id',
+            totalSales: 1
+          }
+        },
+        {
+          $sort: { salesperson: 1 }
+        }
+      ]).toArray();
+      res.send(salesReport);
+    }, next);
+  } catch (err) {
+    console.error('', err);
+    next(err);
+  }
+});
+
+module.exports = router;
+>>>>>>> b9ee470 (Add tooltip to submit button)

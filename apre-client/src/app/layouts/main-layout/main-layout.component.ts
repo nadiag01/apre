@@ -307,7 +307,13 @@ export class MainLayoutComponent {
   salesReports = [
     { name: 'Sales by Region', url: '/reports/sales/sales-by-region' },
     { name: 'Sales by Region - Tabular', url: '/reports/sales/sales-by-region-tabular' },
+<<<<<<< HEAD
     // Add more reports as needed
+=======
+    { name: 'Sales Data', url: '/reports/sales/sales-data' },
+    { name: 'Amount', url: '/reports/sales/amount' },
+// Add more reports as needed
+>>>>>>> b9ee470 (Add tooltip to submit button)
   ];
 
   agentPerformanceReports = [
