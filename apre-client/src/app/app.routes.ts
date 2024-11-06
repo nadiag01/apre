@@ -27,6 +27,7 @@ import { CustomerFeedbackComponent } from './reports/customer-feedback/customer-
 import { SalesByRegionTabularComponent } from './reports/sales/sales-by-region-tabular/sales-by-region-tabular.component';
 import { SalesDataComponent } from './reports/sales/sales-data/sales-data.component';
 
+
 // Export user-management routes
 export const userManagementRoutes: Routes = [
   {
@@ -61,7 +62,8 @@ export const salesReportRoutes: Routes = [
   {
     path: 'sales-data',
     component: SalesDataComponent
-  }
+  },
+
 ];
 
 // Agent performance routes

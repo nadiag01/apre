@@ -81,30 +81,6 @@ router.get('/regions/:region', (req, res, next) => {
 /**
  * @description
  *
- * GET /regions
- *
- * Fetches a list of distinct sales regions.
- *
- * Example:
- * fetch('/regions')
- *  .then(response => response.json())
- *  .then(data => console.log(data));
- */
-router.get('/regions', (req, res, next) => {
-  try {
-    mongo (async db => {
-      const regions = await db.collection('sales').distinct('region');
-      res.send(regions);
-    }, next);
-  } catch (err) {
-    console.error('Error getting regions: ', err);
-    next(err);
-  }
-});
-
-/**
- * @description
- *
  * GET /salesData
  *
  * Fetches all sales data .
